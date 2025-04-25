@@ -1,20 +1,33 @@
-import { Controller, Get, Post } from "@nestjs/common";
-import { EncuestasService } from "../services/encuestas.service";
 
-@Controller("/encuestas")
-export class EncuestasController{
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { EncuestasService } from '../services/encuestas.service';
+import { CreateEncuestaDTO } from '../dtos/create-encuesta.dto';
+import { Encuesta } from '../entities/encuesta.entity';
+import { ObtenerEncuestaDto } from '../dtos/obtener-encuesta.dto';
 
-    constructor(private encuestasService: EncuestasService){
-        
-    }
+@Controller('/encuestas')
+export class EncuestasController {
 
-    @Get(':id')
-    async getEncuesta():Promise<void>{
+  constructor(private encuestasService: EncuestasService) {}
 
-    }
+  @Post()
+  async crearEncuesta(@Body() dto: CreateEncuestaDTO): Promise<{
+    id: number;
+    codigoRespuesta: string;
+    codigoResultados: string;
+  }> {
+    return await this.encuestasService.crearEncuesta(dto);
+  }
 
-    @Post('')
-    async crearEncuesta():Promise<void>{
-
-    }
+  @Get(':id')
+  async obtenerEncuesta(
+    @Param('id') id: number,
+    @Query() dto: ObtenerEncuestaDto,
+  ): Promise<Encuesta> {
+    return await this.encuestasService.obtenerEncuesta(
+      id,
+      dto.codigo,
+      dto.tipo,
+    );
+  }
 }
