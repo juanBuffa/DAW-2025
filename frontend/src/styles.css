@@ -1,0 +1,12 @@
+@import "primeicons/primeicons.css";
+
+body{
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+html {
+    font-size: 1.2rem;
+}

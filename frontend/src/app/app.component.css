@@ -1,0 +1,12 @@
+::ng-deep .p-confirmdialog {
+  margin: 1rem;
+}
+
+::ng-deep .p-dialog {
+  margin: 1rem;
+  max-width: 90vw;
+}
+
+::ng-deep .p-toast {
+  max-width: 80%;
+}
