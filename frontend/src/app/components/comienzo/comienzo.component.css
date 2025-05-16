@@ -1,0 +1,13 @@
+:host{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #ECFFDC;
+  width: 100vw;
+}
+
+h1{
+  margin: 0;
+}
