@@ -31,10 +31,4 @@ export class EncuestasService {
     );
   }
 
-  test() {
-    this.traerEncuesta(1, 'codigo-test', CodigoTipoEnum.RESPUESTA).subscribe({
-      next: (res) => console.log(res),
-      error: (err) => console.log(err),
-    });
-  }
 }

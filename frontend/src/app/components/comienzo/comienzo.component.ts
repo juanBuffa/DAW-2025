@@ -5,7 +5,7 @@ import { SeccionComponent } from '../seccion/seccion.component';
 
 @Component({
   selector: 'app-comienzo',
-  imports: [ButtonModule, RouterModule, SeccionComponent],
+  imports: [ButtonModule, RouterModule],
   templateUrl: './comienzo.component.html',
   styleUrl: './comienzo.component.css'
 })

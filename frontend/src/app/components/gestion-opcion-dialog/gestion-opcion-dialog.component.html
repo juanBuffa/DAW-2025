@@ -1,0 +1,28 @@
+<p-dialog
+  header="Gestión de Opción"
+  [modal]="true"
+  [(visible)]="visible"
+  [style]="{ width: '25rem' }"
+  (onHide)="cerrar()"
+>
+  <form [formGroup]="form" (ngSubmit)="agregar()">
+    <div id="contenedor-agregar-opcion">
+      <p-floatlabel variant="on" id="input-texto">
+        <input pInputText id="input-opcion" formControlName="texto" />
+        <label for="input-opcion">Texto de la opción</label>
+        @if (texto.invalid && texto.touched) {
+          <app-texto-error>Requerido</app-texto-error>
+        }
+      </p-floatlabel>
+      <button
+        pButton
+        pRipple
+        type="submit"
+        severity="contrast"
+        icon="pi pi-check"
+      >
+        Finalizar
+      </button>
+    </div>
+  </form>
+</p-dialog>

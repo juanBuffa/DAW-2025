@@ -1,0 +1,9 @@
+#contenedor-agregar-opcion {
+  margin-top: 0.3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+#input-texto{
+    margin-bottom: 1rem;
+}

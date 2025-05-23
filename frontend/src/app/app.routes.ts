@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { ComienzoComponent } from './components/comienzo/comienzo.component';
-import { CreacionComponent } from './components/creacion/creacion.component';
+import { CreacionEncuestaComponent } from './components/creacion-encuesta/creacion-encuesta.component';
 
 export const routes: Routes = [
   {
@@ -9,7 +9,7 @@ export const routes: Routes = [
   },
   {
     path: 'creacion',
-    component: CreacionComponent,
+    component: CreacionEncuestaComponent,
   },
   {
     path: '**',

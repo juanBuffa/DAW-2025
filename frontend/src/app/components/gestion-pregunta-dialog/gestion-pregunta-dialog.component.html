@@ -1,0 +1,87 @@
+<p-dialog
+  header="Gestión de Pregunta"
+  [modal]="true"
+  [(visible)]="visible"
+  [style]="{ width: '25rem' }"
+  resizable="false"
+  (onHide)="cerrar()"
+>
+  <form [formGroup]="form" (ngSubmit)="agregar()">
+    <div id="contenedor-creacion-pregunta">
+      <p-floatlabel variant="on" id="input-texto">
+        <input pInputText id="input-texto" formControlName="texto" />
+        <label for="input-nombre">Texto de la pregunta</label>
+        @if (texto.invalid && texto.touched) {
+          <app-texto-error>Requerido</app-texto-error>
+        }
+      </p-floatlabel>
+      <p-dropdown
+        [options]="getTiposPreguntaPresentacion()"
+        (onChange)="resetearOpciones()"
+        id="dropdown-tipos-pregunta"
+        formControlName="tipo"
+        appendTo="body"
+        placeholder="Tipo de Pregunta"
+        optionLabel="presentacion"
+        optionValue="tipo"
+      />
+      @if (tipo.invalid && tipo.touched) {
+        <app-texto-error>Requerido</app-texto-error>
+      }
+      @if (tipo.value && esMultipleChoice(tipo.value)) {
+        <app-seccion
+          maxWidth="100vw"
+          minWidth="0vw"
+          leftMargin="0vw"
+          rightMargin="0vw"
+        >
+          <h2 id="heading-opciones">Opciones</h2>
+          @if (opciones.value.length > 0) {
+            <ul>
+              @for (opcion of opciones.value; track $index; let idx = $index) {
+                <li>
+                  <div class="contenedor-opcion">
+                    <p class="texto-opcion">{{ opcion.texto }}</p>
+                    <div id="botonera-opciones">
+                      <p-button
+                        (onClick)="confirmarEliminarOpcion(idx)"
+                        id="boton-eliminar-opcion"
+                        icon="pi pi-times"
+                        severity="danger"
+                      />
+                    </div>
+                  </div>
+                </li>
+              }
+            </ul>
+          } @else {
+            <p id="opciones-vacio">Aún no hay opciones cargadas</p>
+          }
+          <p-button
+            (onClick)="abrirAgregarOpcion()"
+            label="Agregar Opción"
+            icon="pi pi-plus"
+          />
+        </app-seccion>
+        @if (opciones.touched && form.hasError("opcionesRequeridas")) {
+          <app-texto-error>Debe ingresar opciones</app-texto-error>
+        }
+      }
+      <div id="contenedor-boton-finalizar-gestion">
+        <button
+          pButton
+          pRipple
+          type="submit"
+          severity="contrast"
+          icon="pi pi-check"
+        >
+          Finalizar
+        </button>
+      </div>
+    </div>
+  </form>
+</p-dialog>
+<app-gestion-opcion-dialog
+  [(visible)]="dialogGestionOpcionVisible"
+  (agregarOpcion)="agregarOpcion($event)"
+/>

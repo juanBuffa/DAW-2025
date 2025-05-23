@@ -1,0 +1,70 @@
+<h1>Creá una encuesta</h1>
+<form [formGroup]="form" (ngSubmit)="confirmarCrearEncuesta()">
+  <div id="contenedor-encuesta">
+    <app-seccion>
+      <p-floatlabel variant="on" id="float-label-nombre-encuesta">
+        <input
+          pInputText
+          id="input-nombre"
+          formControlName="nombre"
+          autocomplete="off"
+        />
+        <label for="input-nombre">Nombre de la encuesta</label>
+      </p-floatlabel>
+      @if (nombre.invalid && nombre.touched) {
+        <app-texto-error>Requerido</app-texto-error>
+      }
+    </app-seccion>
+    @for (pregunta of preguntas.value; track idx; let idx = $index) {
+      <app-seccion>
+        <div class="contenedor-pregunta">
+          <p class="texto-pregunta">
+            {{ pregunta.texto }} ({{
+              getTipoPreguntaPresentacion(pregunta.tipo)
+            }})
+          </p>
+          <ul>
+            @for (opcion of pregunta.opciones; track i; let i = $index) {
+              <li>
+                <p class="texto-opcion">{{ opcion.texto }}</p>
+              </li>
+            }
+          </ul>
+          <div class="botonera-pregunta">
+            <p-button
+              (onClick)="confirmarEliminarPregunta(idx)"
+              id="boton-eliminar-pregunta"
+              icon="pi pi-times"
+              label="Eliminar"
+              severity="danger"
+            ></p-button>
+          </div>
+        </div>
+      </app-seccion>
+    }
+    <app-seccion>
+      <p-button
+        label="Agregar Pregunta"
+        (onClick)="abrirDialog()"
+        icon="pi pi-plus"
+      />
+      @if (preguntas.invalid && form.touched) {
+        <app-texto-error>Debe agregar al menos una pregunra</app-texto-error>
+      }
+    </app-seccion>
+    <button
+      id="boton-finalizar"
+      pButton
+      pRipple
+      type="submit"
+      icon="pi pi-check"
+      severity="contrast"
+    >
+      Finalizar
+    </button>
+  </div>
+</form>
+<app-gestion-pregunta-dialog
+  [(visible)]="dialogGestionPreguntaVisible"
+  (agregarPregunta)="agregarPregunta($event)"
+/>
