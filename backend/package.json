@@ -9,6 +9,7 @@
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "compodoc": "npx compodoc -p tsconfig.json -d documentation -s -w",
+    "deploy": "npm run build && pm2 start ecosystem.config.js",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
